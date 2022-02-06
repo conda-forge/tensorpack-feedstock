@@ -8,9 +8,11 @@ package:
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 022b610e416e62e3575424cd08e60af27808a5fb6914294615391caf582cbd4f
+  patches:
+    - patches/silence_opencv_warnings.patch
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . -vv"
 
