@@ -6,23 +6,23 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: 022b610e416e62e3575424cd08e60af27808a5fb6914294615391caf582cbd4f
   patches:
     - patches/silence_opencv_warnings.patch
 
 build:
-  number: 1
+  number: 2
   noarch: python
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
     - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - numpy >=1.14
     - six
     - termcolor >=1.1
@@ -36,6 +36,8 @@ requirements:
     # - tensorflow
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - tensorpack
 
